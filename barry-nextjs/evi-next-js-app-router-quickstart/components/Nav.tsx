@@ -1,0 +1,58 @@
+import { useLayoutEffect, useState } from "react";
+import HumeLogo from "./logos/Hume";
+import { Button } from "./ui/button";
+import { Moon, Sun } from "lucide-react";
+import Github from "./logos/GitHub";
+import pkg from "@/package.json";
+
+export default function Nav ({sessionId, escalationLevel, milestone} : {sessionId: string, escalationLevel: number, milestone: string }) {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useLayoutEffect(() => {
+    const el = document.documentElement;
+
+    if (el.classList.contains("dark")) {
+      setIsDarkMode(true);
+    } else {
+      setIsDarkMode(false);
+    }
+  }, []);
+
+  const toggleDark = () => {
+    const el = document.documentElement;
+    el.classList.toggle("dark");
+    setIsDarkMode((prev) => !prev);
+  };
+
+  return (
+    <div
+      className={
+        "px-4 py-2 flex items-center h-14 z-50 bg-card border-b border-border"
+      }
+    >
+      <div >
+        <HumeLogo className={"h-5 w-auto"} />
+        <span> with Barry</span>
+      </div>
+      <div className={"ml-auto flex items-center gap-1"}>
+        {sessionId != "" && <span className=""><b>Session Id:</b> <code>{sessionId}</code></span>}
+        {escalationLevel != -1 && <span className=""><b>Escalation Level:</b> <code>{escalationLevel}</code></span>}
+        {milestone != "" && <span><b>Milestone:</b> <code>{milestone.split("-")[0]}</code></span>}
+        <Button
+          onClick={toggleDark}
+          variant={"ghost"}
+          className={"ml-auto flex items-center gap-1.5"}
+        >
+          <span>
+            {isDarkMode ? (
+              <Sun className={"size-4"} />
+            ) : (
+              <Moon className={"size-4"} />
+            )}
+          </span>
+          <span>{isDarkMode ? "Light" : "Dark"} Mode</span>
+        </Button>
+      </div>
+    </div>
+  );
+};
