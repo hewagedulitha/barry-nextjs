@@ -13,7 +13,7 @@ export default function Guide() {
                 <p></p>
                 <p className="font-normal text-gray-700 dark:text-gray-400"><b>Step 2.</b> Then select the right microphone and click <b>Allow</b>. (It is only prompted the first time).</p>
                 <img src="tip2.png" />
-                <p className="font-normal text-gray-700 dark:text-gray-400"><b>Step 3.</b> Start the conversation with your name. Eg. "Hi Barry, I'm <b>Franco</b>, a nurse here.".</p>
+                <p className="font-normal text-gray-700 dark:text-gray-400"><b>Step 3.</b> Start the conversation with your name. Eg. &quot;Hi Barry, I&apos;m <b>Franco</b>, a nurse here.&quot;.</p>
                 <p></p>
                 <p className="font-normal text-gray-700 dark:text-gray-400"><b>Step 4.</b> When you are done, terminate the session by pressing the <b>End Call</b> button.</p>
                 {/* <img src="tip3.png" />
