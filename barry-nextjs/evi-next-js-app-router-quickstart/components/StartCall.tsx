@@ -27,7 +27,8 @@ export default function StartCall({ accessToken, history, setHistory, handleSess
 
   const EVI_CONNECT_OPTIONS: ConnectOptions = {
     auth: { type: "accessToken", value: accessToken },
-    configId: "bcc0d2e7-7952-4e27-83ce-0006fc5e6b35"
+    // configId: "bcc0d2e7-7952-4e27-83ce-0006fc5e6b35"
+    configId: "3e525ac1-b51c-4f61-91f0-3d35c415183c"
   };
 
   async function handleCreateNewSession() {
