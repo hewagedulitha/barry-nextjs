@@ -7,6 +7,8 @@ import Guide from "./Guide";
 import { API_URL } from "./Contants";
 import Survey from "./Survey";
 import { SessionContext } from "./SessionContext";
+import { SessionSettings } from "hume/api/resources/empathicVoice";
+import HistoryItem from "./HistoryItem";
 
 export default function StartCall({ accessToken, history, setHistory, handleSessionChange, handleEscalationLevelChange } : {
   accessToken: string,
@@ -24,12 +26,6 @@ export default function StartCall({ accessToken, history, setHistory, handleSess
   const [currentMilestone, setCurrentMilestone] = useState("")
   const [newEscalationLevel, setNewEscalationLevel] = useState(3)
   const [currentEscalationLevel, setCurrentEscalationLevel] = useState("")
-
-  const EVI_CONNECT_OPTIONS: ConnectOptions = {
-    auth: { type: "accessToken", value: accessToken },
-    // configId: "bcc0d2e7-7952-4e27-83ce-0006fc5e6b35"
-    configId: "3e525ac1-b51c-4f61-91f0-3d35c415183c"
-  };
 
   async function handleCreateNewSession() {
     setLoading(true)
@@ -74,6 +70,12 @@ export default function StartCall({ accessToken, history, setHistory, handleSess
   }
 
   function connectEVI() {
+    const EVI_CONNECT_OPTIONS: ConnectOptions = {
+      auth: { type: "accessToken", value: accessToken },
+      // configId: "bcc0d2e7-7952-4e27-83ce-0006fc5e6b35",
+      configId: "3e525ac1-b51c-4f61-91f0-3d35c415183c",
+      sessionSettings: {type: "session_settings", customSessionId: session},
+    };
     connect(EVI_CONNECT_OPTIONS)
                     .then(() => {})
                     .catch(() => {})
@@ -146,7 +148,7 @@ export default function StartCall({ accessToken, history, setHistory, handleSess
               </motion.div>
             </AnimatePresence>
             <div className="p-2"></div>
-            {session != "" && <Survey history={history} setHistory={setHistory}/>}
+            {/* {session != "" && <Survey history={history} setHistory={setHistory}/>} */}
             </div>
           </div>
           

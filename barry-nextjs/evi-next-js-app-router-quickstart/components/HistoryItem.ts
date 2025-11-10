@@ -1,4 +1,4 @@
-class HistoryItem {
+export default class HistoryItem {
     id!: string;
     user!: string;
     assistant!: string;

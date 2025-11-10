@@ -2,14 +2,18 @@ import { ConnectOptions, useVoice } from "@humeai/voice-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Button } from "./ui/button";
 import { Phone } from "lucide-react";
-import { SetStateAction, useState } from 'react'
+import { SetStateAction, useState, useContext } from 'react'
 import Guide from "./Guide";
 import { API_URL } from "./Contants";
 import { SessionContext } from "./SessionContext";
+import HistoryItem from "./HistoryItem";
 
-export default function Survey({history, setHistory} : { 
+export default function Survey({history, setHistory, setShowSurvey} : { 
   history: HistoryItem[], 
-  setHistory: ([]) => void}) {
+  setHistory: ([]) => void,
+  setShowSurvey: (arg0: boolean) => void,
+}) {
+  const session = useContext(SessionContext);
 
   function handleToggleGood(turnId: string, good: boolean) {
     setHistory(history.map(row => {
@@ -42,7 +46,9 @@ export default function Survey({history, setHistory} : {
   }
 
   function sendFeedback() {
-    fetch( API_URL + '/feedback', {
+    setShowSurvey(false)
+    console.log(JSON.stringify(history))
+    fetch( API_URL + '/feedback?session_id='+session, {
       method: 'POST', // Specify the HTTP method as POST
       headers: {
           'Content-Type': 'application/json' // Indicate the content type of the request body

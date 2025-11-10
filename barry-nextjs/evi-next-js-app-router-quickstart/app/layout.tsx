@@ -16,9 +16,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
+      {/* <head>
         <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests"></meta>
-      </head>
+      </head> */}
       <body
         className={cn(
           GeistSans.variable,

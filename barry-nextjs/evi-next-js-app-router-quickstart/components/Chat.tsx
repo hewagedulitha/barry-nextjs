@@ -9,7 +9,8 @@ import { SessionContext } from "./SessionContext.js";
 import { ConnectOptions, useVoice } from "@humeai/voice-react";
 import { API_URL } from "./Contants";
 import Nav from "./Nav";
-import { History } from "lucide-react";
+import HistoryItem from "./HistoryItem";
+import Survey from "./Survey";
 
 export default function ClientComponent({
   accessToken,
@@ -121,11 +122,16 @@ export default function ClientComponent({
     })
     const data = await response.json()
     console.log(data)
-    setHistory(dummyData["history"].map(item => {
+    setHistory(data["history"].map((item: { role: string; content: string; }, i: any) => {
       var row = new HistoryItem()
-      row.id = item.turnId
-      row.user = item.user.content
-      row.assistant = item.assistant.content
+      row.id = String(i)
+      if (item.role == "user") {
+          row.user = item.content
+      } else {
+        row.assistant = item.content
+      }
+      // row.user = item.user.content
+      // row.assistant = item.assistant.content
       return row
     }))
   }
@@ -142,6 +148,7 @@ export default function ClientComponent({
   function handleEndCall() {
     fetchSessionData()
     removeInterval()
+    setShowSurvey(true)
   }
 
   return (
@@ -174,7 +181,12 @@ export default function ClientComponent({
         <SessionContext.Provider value={sessionId}>
           <Messages ref={ref} />
           <Controls onEndCall={handleEndCall}/>
-          <StartCall accessToken={accessToken} history={history} setHistory={setHistory} handleSessionChange={handleSessionChange} handleEscalationLevelChange={handleEscalationLevelChange} />
+          {showSurvey
+            ? <Survey history={history} setHistory={setHistory} setShowSurvey={setShowSurvey}/>
+          : <StartCall accessToken={accessToken} history={history} setHistory={setHistory} handleSessionChange={handleSessionChange} handleEscalationLevelChange={handleEscalationLevelChange} />
+          }
+          
+          
         </SessionContext.Provider>
 
       </VoiceProvider>
