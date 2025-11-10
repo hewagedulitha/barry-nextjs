@@ -27,8 +27,9 @@ export default function ClientComponent({
   const [behaviourDescription, setBehaviourDescription] = useState("")
   const [currentMilestone, setCurrentMilestone] = useState("")
   const [escalationLevel, setEscalationLevel] = useState(-1)
+  const intervalRef = useRef<number | undefined>(undefined)
 
-  var interval: NodeJS.Timeout | null | undefined = null
+  // var interval: NodeJS.Timeout | null | undefined = null
 
   const dummyData = {
     "session_id":"5047d84c-1207-4cd7-9d1e-9bde410c5409",
@@ -85,18 +86,12 @@ export default function ClientComponent({
   ]} 
 
   function startInterval(session: string) {
-    fetchStatus(session)
-    if (interval != null) {
-      clearInterval(interval)
-    }
     
-    interval = setInterval(fetchStatus, 5000, session)
-  }
-
-  function removeInterval() {
-     if (interval != null) {
-      clearInterval(interval)
-    }
+    fetchStatus(session)
+    window.clearInterval(intervalRef.current)
+    console.log("Cleared interval: ", intervalRef.current)
+    intervalRef.current = window.setInterval(fetchStatus, 5000, session)
+    console.log("Started interval for session: ", session)
   }
 
   async function fetchStatus(session: String) {
@@ -121,19 +116,36 @@ export default function ClientComponent({
       }),
     })
     const data = await response.json()
-    console.log(data)
-    setHistory(data["history"].map((item: { role: string; content: string; }, i: any) => {
-      var row = new HistoryItem()
+    console.log("Got session history", data);
+    const array = data["history"];
+
+    var row = new HistoryItem()
+    row.user = ""
+    row.assistant = ""
+    var rows: HistoryItem[] = []
+    var isNewTurn = false
+    for (let i = 0; i < array.length; i++) {
+      let item: { role: string; content: string; } = array[i];
       row.id = String(i)
       if (item.role == "user") {
-          row.user = item.content
+          row.user += item.content + "\n"
       } else {
-        row.assistant = item.content
+          row.assistant += item.content
+          isNewTurn = i+1 == array.length || array[i+1].role == "user"
       }
-      // row.user = item.user.content
-      // row.assistant = item.assistant.content
-      return row
-    }))
+
+      
+
+      if (isNewTurn) {
+          rows.push(row)
+          row = new HistoryItem()
+          row.user = ""
+          row.assistant = ""
+          isNewTurn = false
+      }
+
+    }
+    setHistory(rows)
   }
 
   function handleSessionChange(session: string) {
@@ -146,8 +158,8 @@ export default function ClientComponent({
   }
 
   function handleEndCall() {
+    console.log("Got end call"); // Access element using index
     fetchSessionData()
-    removeInterval()
     setShowSurvey(true)
   }
 
