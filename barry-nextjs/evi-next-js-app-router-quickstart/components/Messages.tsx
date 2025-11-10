@@ -38,9 +38,7 @@ const Messages = forwardRef<
       <motion.div
         className={"max-w-2xl mx-auto w-full flex flex-col gap-4 pb-24"}
       >
-        <div className="grid grid-col-2>">
-          {/* <Guide/> */}
-<AnimatePresence mode={"popLayout"}>
+        <AnimatePresence mode={"popLayout"}>
           {messages.map((msg, index) => {
             if (
               msg.type === "user_message" ||
@@ -84,7 +82,6 @@ const Messages = forwardRef<
             return null;
           })}
         </AnimatePresence>
-        </div>
         
       </motion.div>
     </motion.div>
