@@ -93,7 +93,7 @@ export default function Survey({history, setHistory, setShowSurvey} : {
                               <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                   <tr>
                                       <th className="px-6 py-3">
-                                          Prompt
+                                          Nurse
                                       </th>
                                       <th className="px-6 py-3">
                                           Response
@@ -105,7 +105,7 @@ export default function Survey({history, setHistory, setShowSurvey} : {
                                           Bad
                                       </th>
                                       <th className="px-6 py-3">
-                                          Comments
+                                          Alternate Response
                                       </th>
                                   </tr>
                               </thead>

@@ -35,9 +35,10 @@ export default function Nav ({sessionId, escalationLevel, milestone} : {sessionI
         <span> with Barry</span>
       </div>
       <div className={"ml-auto flex items-center gap-1"}>
-        {sessionId != "" && <span className=""><b>Session Id:</b> <code>{sessionId}</code></span>}
+        
         {escalationLevel != -1 && <span className=""><b>Escalation Level:</b> <code>{escalationLevel}</code></span>}
         {milestone != "" && <span><b>Milestone:</b> <code>{milestone.split("-")[0]}</code></span>}
+        {sessionId != "" && <span className=""><b>Session Id:</b> <code>{sessionId}</code></span>}
         <Button
           onClick={toggleDark}
           variant={"ghost"}
