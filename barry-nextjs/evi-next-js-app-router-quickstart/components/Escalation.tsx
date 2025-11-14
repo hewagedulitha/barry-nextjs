@@ -5,6 +5,7 @@ import { Phone } from "lucide-react";
 import { useState } from 'react'
 import { useContext } from 'react';
 import { SessionContext } from "./SessionContext";
+import { API_URL } from "./Contants";
 
 export default function Escalation() {
     const session = useContext(SessionContext);
@@ -14,7 +15,6 @@ export default function Escalation() {
     const [newEscalationLevel, setNewEscalationLevel] = useState(3)
     const [currentEscalationLevel, setCurrentEscalationLevel] = useState("")
   
-  const API_URL = "http://3.24.142.221:9000"
 
   async function handleSetEscalationLevel(level: number) {
     const response = await fetch(API_URL + "/escalation/" + level + "?session_id=" + session, {

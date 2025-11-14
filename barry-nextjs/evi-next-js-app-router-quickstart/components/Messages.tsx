@@ -15,20 +15,6 @@ const Messages = forwardRef<
   const { messages } = useVoice();
   const [escalationLevel, setEscalationLevel] = useState(3)
 
-  const API_URL = "http://3.24.142.221:9000"
-
-
-  async function handleSetEscalationLevel(session: String) {
-    const response = await fetch(API_URL + "/escalation/" + escalationLevel + "?session_id=" + session, {
-      method: "get",
-      headers: new Headers({
-        'Access-Control-Allow-Origin': '*',
-      }),
-    })
-    const data = await response.json()
-    console.log(data)
-  }
-
   return (
 <motion.div
       layoutScroll
