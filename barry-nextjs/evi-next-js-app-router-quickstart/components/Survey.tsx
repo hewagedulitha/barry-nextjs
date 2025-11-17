@@ -99,13 +99,13 @@ export default function Survey({history, setHistory, setShowSurvey} : {
                                           Response
                                       </th>
                                       <th className="px-6 py-3">
-                                          Good
+                                          Realistic
                                       </th>
                                       <th className="px-6 py-3">
-                                          Bad
+                                          Unrealistic
                                       </th>
                                       <th className="px-6 py-3">
-                                          Alternate Response
+                                          Alternate Response / Comments
                                       </th>
                                   </tr>
                               </thead>

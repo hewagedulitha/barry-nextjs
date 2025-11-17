@@ -12,7 +12,7 @@ export default function Guide() {
                 <p className="font-normal text-gray-700 dark:text-gray-400"><b>Step 1.</b> Click on <b>Start Call</b> button to talk with Barry.</p>
                 {/* <img src="tip1.png" /> */}
                 <p></p>
-                <p className="font-normal text-gray-700 dark:text-gray-400"><b>Step 2.</b> Then select the right microphone and click <b>Allow</b>. (It is only prompted the first time).</p>
+                <p className="font-normal text-gray-700 dark:text-gray-400"><b>Step 2.</b> Then select the correct microphone and click <b>Allow</b>. (It is only prompted the first time).</p>
                 <img src="tip2.png" alt=""/>
                 <p className="font-normal text-gray-700 dark:text-gray-400"><b>Step 3.</b> Start the conversation with your name. Eg. &quot;Hi Barry, I&apos;m <b>Franco</b>, a nurse here.&quot;.</p>
                 <p></p>
