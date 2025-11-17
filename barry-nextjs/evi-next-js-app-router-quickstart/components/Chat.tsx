@@ -130,7 +130,15 @@ export default function ClientComponent({
       if (item.role == "user") {
           row.user += item.content + "\n"
       } else {
-          row.assistant += item.content
+          var content = item.content
+          if (content.includes("{")) {
+            var str = content.match(/"reply": "([\s\S]*?)",\n"emotion"/) ?? "";
+            console.log(str[1]);
+            row.assistant += str[1]
+          } else {
+            row.assistant += item.content
+          }
+          
           isNewTurn = i+1 == array.length || array[i+1].role == "user"
       }
 

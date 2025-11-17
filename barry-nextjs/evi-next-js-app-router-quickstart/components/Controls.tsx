@@ -9,7 +9,12 @@ import { cn } from "@/utils";
 import Escalation from "./Escalation";
 
 export default function Controls({onEndCall}: {onEndCall: () => void }) {
-  const { disconnect, status, isMuted, unmute, mute, micFft } = useVoice();
+  const { disconnect, status, isMuted, unmute, mute, micFft, messages } = useVoice();
+
+  if (status.value === "connected" && messages.filter(m => m.type === "user_message").length > 2) {
+    console.log("Ending Call")
+    onDisconnect()
+  }
 
   async function onDisconnect() {
       await disconnect()

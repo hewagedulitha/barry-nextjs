@@ -12,8 +12,13 @@ const Messages = forwardRef<
   ComponentRef<typeof motion.div>,
   Record<never, never>
 >(function Messages(_, ref) {
-  const { messages } = useVoice();
-  const [escalationLevel, setEscalationLevel] = useState(3)
+  const { messages, disconnect, status } = useVoice();
+  const [escalationLevel, setEscalationLevel] = useState(3);
+
+  if (status.value === "connected" && messages.filter(m => m.type === "user_message").length > 3) {
+    console.log("Ending Call")
+    disconnect()
+  }
 
   return (
 <motion.div
