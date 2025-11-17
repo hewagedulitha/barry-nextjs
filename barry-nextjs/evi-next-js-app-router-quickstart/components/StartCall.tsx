@@ -145,6 +145,11 @@ export default function StartCall({ accessToken, history, setHistory, handleSess
                   <span className="font-medium">Error</span> {error}
                 </div></>
                 }
+                {
+                  status.value === "error" && <><div className="p-2"></div><div className="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                  <span className="font-medium">Error</span> {status.reason}
+                </div></>
+                }
               </motion.div>
             </AnimatePresence>
             <div className="p-2"></div>
