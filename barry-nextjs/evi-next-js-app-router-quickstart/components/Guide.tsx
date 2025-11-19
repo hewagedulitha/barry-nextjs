@@ -8,15 +8,17 @@ export default function Guide() {
                     Step-by-Step Guide
               </h5>
               <div className="grid grid-cols-2 gap-4">
-                
-                <p className="font-normal text-gray-700 dark:text-gray-400"><b>Step 1.</b> Click on <b>Start Call</b> button to talk with Barry.</p>
+                <p className="font-normal text-gray-700 dark:text-gray-400"><b>Step 1.</b> Set <b>Escalation Level</b>.</p>
                 {/* <img src="tip1.png" /> */}
                 <p></p>
-                <p className="font-normal text-gray-700 dark:text-gray-400"><b>Step 2.</b> Then select the correct microphone and click <b>Allow</b>. (It is only prompted the first time).</p>
-                <img src="tip2.png" alt=""/>
-                <p className="font-normal text-gray-700 dark:text-gray-400"><b>Step 3.</b> Start the conversation with your name. Eg. &quot;Hi Barry, I&apos;m <b>Franco</b>, a nurse here.&quot;.</p>
+                <p className="font-normal text-gray-700 dark:text-gray-400"><b>Step 2.</b> Click on <b>Start Call</b> button to talk with Barry.</p>
+                {/* <img src="tip1.png" /> */}
                 <p></p>
-                <p className="font-normal text-gray-700 dark:text-gray-400"><b>Step 4.</b> When you are done, terminate the session by pressing the <b>End Call</b> button.</p>
+                <p className="font-normal text-gray-700 dark:text-gray-400"><b>Step 3.</b> Then select the correct microphone and click <b>Allow</b>. (It is only prompted the first time).</p>
+                <img src="tip2.png" alt=""/>
+                <p className="font-normal text-gray-700 dark:text-gray-400"><b>Step 4.</b> Start the conversation with your name. Eg. &quot;Hi Barry, I&apos;m <b>Franco</b>, a nurse here.&quot;.</p>
+                <p></p>
+                <p className="font-normal text-gray-700 dark:text-gray-400"><b>Step 5.</b> When you are done, terminate the session by pressing the <b>End Call</b> button.</p>
                 {/* <img src="tip3.png" />
                 // <p></p> */}
                 <p></p>
