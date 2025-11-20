@@ -115,10 +115,11 @@ export default function ClientComponent({
         'Access-Control-Allow-Origin': '*',
       }),
     })
+    
     const data = await response.json()
     console.log("Got session history", data);
     const array = data["history"];
-
+    
     var row = new HistoryItem()
     row.user = ""
     row.assistant = ""
@@ -132,7 +133,7 @@ export default function ClientComponent({
       } else {
           var content = item.content
           if (content.includes("{")) {
-            var str = content.match(/"reply": "([\s\S]*?)",\n"emotion"/) ?? "";
+            var str = content.match(/"reply": "([\s\S]*?)",( *)\n"emotion"/) ?? "";
             console.log(str[1]);
             row.assistant += str[1]
           } else {
@@ -200,7 +201,7 @@ export default function ClientComponent({
       >
         <SessionContext.Provider value={sessionId}>
           <Messages ref={ref} />
-          <Controls onEndCall={handleEndCall}/>
+          <Controls onEndCall={handleEndCall} milestone={currentMilestone}/>
           {showSurvey
             ? <Survey history={history} setHistory={setHistory} setShowSurvey={setShowSurvey}/>
           : <StartCall accessToken={accessToken} history={history} setHistory={setHistory} handleSessionChange={handleSessionChange} handleEscalationLevelChange={handleEscalationLevelChange} />

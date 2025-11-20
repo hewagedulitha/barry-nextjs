@@ -8,10 +8,12 @@ import MicFFT from "./MicFFT";
 import { cn } from "@/utils";
 import Escalation from "./Escalation";
 
-export default function Controls({onEndCall}: {onEndCall: () => void }) {
+export default function Controls({onEndCall, milestone}: {onEndCall: () => void , milestone: string}) {
   const { disconnect, status, isMuted, unmute, mute, micFft, messages } = useVoice();
 
-  if (status.value === "connected" && messages.filter(m => m.type === "user_message").length > 16) {
+  if (status.value === "connected" 
+    && (milestone.toLowerCase().includes("violence") || milestone.toLowerCase().includes("calm down")) 
+    && messages.findLast(m => m.type === "user_message")) {
     console.log("Ending Call")
     onDisconnect()
   }

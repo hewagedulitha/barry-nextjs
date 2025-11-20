@@ -54,7 +54,7 @@ export default function StartCall({ accessToken, history, setHistory, handleSess
 
   }
 
-  async function handleSetEscalationLevel(session: String) {
+  async function handleSetEscalationLevel(session: string) {
     setMessage("Setting escalation level...")
     const response = await fetch(API_URL + "/escalation/" + newEscalationLevel + "?session_id=" + session, {
       method: "get",
@@ -63,18 +63,19 @@ export default function StartCall({ accessToken, history, setHistory, handleSess
       }),
     })
     const data = await response.json()
-    connectEVI()
+    connectEVI(session)
     console.log(data)
     handleEscalationLevelChange(Number(data['escalation_level']))
     setLoading(false)
   }
 
-  function connectEVI() {
+  function connectEVI(sessionId: string) {
+    console.log("Sending sesion id to hume: ", sessionId)
     const EVI_CONNECT_OPTIONS: ConnectOptions = {
       auth: { type: "accessToken", value: accessToken },
       // configId: "bcc0d2e7-7952-4e27-83ce-0006fc5e6b35",
       configId: "3e525ac1-b51c-4f61-91f0-3d35c415183c",
-      sessionSettings: {type: "session_settings", customSessionId: session},
+      sessionSettings: {type: "session_settings", customSessionId: sessionId},
     };
     connect(EVI_CONNECT_OPTIONS)
                     .then(() => {})
@@ -112,9 +113,14 @@ export default function StartCall({ accessToken, history, setHistory, handleSess
               >
                 <div className="mb-5">
                       <label className="block mb-2 text-sm font-medium dark:text-white">Escalation Level (1-3)</label>
-                      <input type="text" value={newEscalationLevel} onChange={(e) => setNewEscalationLevel(Number(e.target.value))} id="escalation"
+                      {/* <input type="text" value={newEscalationLevel} onChange={(e) => setNewEscalationLevel(Number(e.target.value))} id="escalation"
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
-                      />
+                      /> */}
+                      <select name="escalationLevel" value={newEscalationLevel} onChange={e => setNewEscalationLevel(Number(e.target.value))} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" >
+                        <option value="1">Level 1 - Distressed but receptive</option>
+                        <option value="2">Level 2 - In pain and frustrated</option>
+                        <option value="3">Level 3 - Verbally abusive and threatening</option>
+                      </select>
                     </div>
                 <Button
                   className={"z-50 flex items-center gap-1.5"}

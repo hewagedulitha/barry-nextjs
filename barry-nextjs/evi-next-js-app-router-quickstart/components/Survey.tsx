@@ -112,7 +112,7 @@ export default function Survey({history, setHistory, setShowSurvey} : {
                               <tbody>
                                 {history.map(row => 
                                     <tr key={row.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
-                                      <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                      <td className="px-6 py-4">
                                         { row.user }
                                       </td>
                                       <td className="px-6 py-4">
