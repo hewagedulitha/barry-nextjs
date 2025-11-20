@@ -15,10 +15,17 @@ export default function Controls({onEndCall, milestone}: {onEndCall: () => void 
     && (milestone.toLowerCase().includes("violence") || milestone.toLowerCase().includes("calm down")) 
     && messages.findLast(m => m.type === "user_message")) {
     console.log("Ending Call")
-    onDisconnect()
+    onDisconnect(true)
   }
 
-  async function onDisconnect() {
+  function sleep(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  async function onDisconnect(wait:boolean = false) {
+      if (wait) {
+          await sleep(10000)
+      }
       await disconnect()
       onEndCall()
   }
@@ -73,7 +80,7 @@ export default function Controls({onEndCall, milestone}: {onEndCall: () => void 
 
             <Button
               className={"flex items-center gap-1"}
-              onClick={onDisconnect}
+              onClick={() => onDisconnect()}
               variant={"destructive"}
             >
               <span>
